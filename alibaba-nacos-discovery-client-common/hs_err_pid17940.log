@@ -1,0 +1,21 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007fd0799feea1, pid=17940, tid=17957
+#
+# JRE version: OpenJDK Runtime Environment (11.0.3+7) (build 11.0.3+7-Ubuntu-1ubuntu219.04.1)
+# Java VM: OpenJDK 64-Bit Server VM (11.0.3+7-Ubuntu-1ubuntu219.04.1, mixed mode, sharing, tiered, compressed oops, g1 gc, linux-amd64)
+# Problematic frame:
+# C  [libjimage.so+0x2ea1]
+#
+# Core dump will be written. Default location: Core dumps may be processed with "/usr/share/apport/apport %p %s %c %d %P" (or dumping to /home/huxuelin/eclipse-workspace/alibaba-nacos-discovery-client-common/core.17940)
+#
+# If you would like to submit a bug report, please visit:
+#   https://bugs.launchpad.net/ubuntu/+source/openjdk-lts
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:35499 -javaagent:/home/huxuelin/eclipse/jee-2019-03/eclipse/configuration/org.eclipse.osgi/404/0/.cp/lib/javaagent-shaded.jar -Dfile.encoding=UTF-8 com.eec.clientcommon.AlibabaNacosDiscoveryClientCommonApplication
+
+Host: 
