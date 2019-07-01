@@ -58,18 +58,85 @@ public interface EchoService {
 在dependencyManagement的dependencies注入springcloud依赖
 ```
 <dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-            <dependency>
-	            <groupId>org.springframework.cloud</groupId>
-	            <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-	            <version>0.9.0.RELEASE</version>
-	            <type>pom</type>
-	            <scope>import</scope>
-	        </dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-dependencies</artifactId>
+    <version>${spring-cloud.version}</version>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+    <version>0.9.0.RELEASE</version>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>
 ```
+
+设置dubbo的配置文件bootstrap.yml
+```
+dubbo:
+  scan:
+    # dubbo 服务扫描基准包
+    base-packages: com.eec.nacos
+  protocol:
+    # dubbo 协议
+    name: dubbo
+    # dubbo 协议端口（ -1 表示自增端口，从 20880 开始）
+    port: -1
+  registry:
+    # 挂载到 Spring Cloud 注册中心
+    address: spring-cloud://localhost
+    
+spring:
+  application:
+    # Dubbo 应用名称
+    name: spring-cloud-alibaba-dubbo-server
+  main:
+    # Spring Boot 2.1 需要设定
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      # Nacos 服务发现与注册配置
+      discovery:
+        server-addr: 127.0.0.1:8848
+```
+
+创建服务器启动配置application.yml
+```
+server:
+    port: 8002
+```
+
+创建service的实现类
+```
+package com.eec.nacos.service.impl;
+
+import org.apache.dubbo.config.annotation.Service;
+
+import service.EchoService;
+
+
+@Service
+public class EchoServiceImpl implements EchoService {
+
+	@Override
+	public String echo(String message) {
+		return "[echo] Hello" + message;
+	}
+
+}
+```
+
+给启动类添加annotation
+```
+@EnableDiscoveryClient
+@EnableAutoConfiguration
+```
+
+鼠标右键 run as application ,启动成功，查看nacos[启动网站](http://127.0.0.1:8848/nacos/#/serviceManagement?dataId=&group=&appName=&namespace= )，在服务列表里有spring-cloud-alibaba-dubbo-server，就说明服务注册成功了，还可以修改服务的端口启动服务，可以看见多个服务，nacos会自动负载均衡。
+
+
+
+
  
