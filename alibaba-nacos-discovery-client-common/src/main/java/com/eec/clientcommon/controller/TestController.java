@@ -14,6 +14,10 @@ public class TestController {
 	
 	@GetMapping("/test") 
 	public String test(String name) {
-		return echoService.echo(name);
+		Long t1 = System.currentTimeMillis();
+		String string =  echoService.echo(name);
+		Long t2 = System.currentTimeMillis();
+		System.out.println(t2 - t1);
+		return string;
 	}
 }
