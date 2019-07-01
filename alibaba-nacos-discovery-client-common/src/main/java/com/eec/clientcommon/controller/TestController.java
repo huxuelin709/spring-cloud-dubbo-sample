@@ -8,14 +8,14 @@ import service.EchoService;
 
 @RestController
 public class TestController {
+
 	@Reference
 	private EchoService echoService;
-	
-	
-	@GetMapping("/test") 
+
+	@GetMapping("/test")
 	public String test(String name) {
 		Long t1 = System.currentTimeMillis();
-		String string =  echoService.echo(name);
+		String string = echoService.echo(name);
 		Long t2 = System.currentTimeMillis();
 		System.out.println(t2 - t1);
 		return string;
