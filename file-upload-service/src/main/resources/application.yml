@@ -1,0 +1,16 @@
+spring:
+    profiles:
+        active: prod
+    servlet:
+        multipart:
+            max-file-size: 100MB
+            max-request-size: 100MB
+    http:
+        encoding:
+            force: true
+            charset: utf-8
+            enabled: true
+uploadPath:
+    base: /home/huxuelin/uploadTemp
+    original: /original
+    thumbnail: /thumb
